@@ -1,0 +1,28 @@
+import turtle # Spirograph Pattern
+import colorsys
+
+# --- Setup ---
+screen = turtle.Screen()
+screen.bgcolor("black")
+t = turtle.Turtle()
+t.speed(0)
+t.width(1) # 1px
+
+# --- Color Setup ---
+def get_color(i, total): # turtle uses RGB Not HSV Or HLS
+    hue = i / total
+    r, g, b = colorsys.hsv_to_rgb(hue, 0.8, 0.9)
+    return (r, g, b)
+
+# --- Spirograph Drawing ---
+def draw_spirograph(radius, count, angle_step):
+    turtle.colormode(1.0) # Use float RGB values
+    for i in range(count):
+        t.color(get_color(i, count))
+        t.circle(radius)
+        t.left(angle_step)
+
+# --- Run ---
+draw_spirograph(radius=120, count=180, angle_step=2)
+t.hideturtle()
+screen.mainloop()
