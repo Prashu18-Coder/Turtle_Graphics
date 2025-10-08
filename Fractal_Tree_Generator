@@ -1,0 +1,36 @@
+import turtle ## Fractal Tree Generator
+
+# --- Configuration ---
+ANGLE = 30
+LENGTH = 160
+DEPTH = 7 
+SHRINK = 0.6
+
+# --- Setup ---
+screen = turtle.getscreen()
+screen.bgcolor("black")
+t = turtle.Turtle()
+t.color("lime")
+t.shape("turtle")
+t.speed(0)
+t.left(90) # Point upwards
+t.penup()
+t.goto(0,-250)
+t.pendown()
+
+# --- Recursive Tree Function ---
+def draw_tree(length, depth):
+    if depth == 0:
+        return
+    t.forward(length)
+    t.left(ANGLE)
+    draw_tree(length * SHRINK, depth - 1)
+    t.right(2 * ANGLE)
+    draw_tree(length * SHRINK, depth - 1)
+    t.left(ANGLE)
+    t.forward(-length)
+
+# --- Run ---
+draw_tree(LENGTH, DEPTH)
+t.hideturtle()
+screen.exitonclick()
